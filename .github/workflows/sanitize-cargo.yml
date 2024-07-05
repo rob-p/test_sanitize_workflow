@@ -1,9 +1,4 @@
 name: Sanitize Cargo
-
-on: push
-
-# .github/workflows/logger.yaml
-name: Event Loggger
 on: 
   push:
     branches:
