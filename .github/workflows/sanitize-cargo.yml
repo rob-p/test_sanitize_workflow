@@ -30,4 +30,5 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add Cargo.toml
           git commit -m "create sanitized release"
-          git tag -a v${VERSION_TAG} -m "version ${VERSION_TAG}"o
+          git tag -a v${VERSION_TAG} -m "version ${VERSION_TAG}"
+          git push origin v${VERSION_TAG}
