@@ -24,11 +24,11 @@ jobs:
           cargo install cargo-sanitize
       - name: Sanitize Cargo.toml file
         run: |
-          export VERSION_TAG=`cargo read-manifest | jq ".version" | tr -d '"'`
           cp Cargo.toml Cargo.toml.cs_orig
           cargo-sanitize -i Cargo.toml.cs_orig -o Cargo.toml
       - name: Tag and push new commit
         run: |
+          export VERSION_TAG=`cargo read-manifest | jq ".version" | tr -d '"'`
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add Cargo.toml.cs_orig
