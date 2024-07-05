@@ -1,6 +1,6 @@
 [package]
 name = "test_sanitize_workflow"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 repository = "https://github.com/rob-p/test_sanitize_workflow"
 
