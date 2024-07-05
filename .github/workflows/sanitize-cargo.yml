@@ -2,7 +2,7 @@ name: Sanitize Cargo
 on: 
   push:
     branches:
-      - master
+      - main
 
 jobs:
   sanitize_cargo_file:
