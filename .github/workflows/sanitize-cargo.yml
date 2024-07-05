@@ -26,8 +26,8 @@ jobs:
           export VERSION_TAG=`cargo read-manifest | jq ".version" | tr -d '"'`
           cp Cargo.toml Cargo.toml.cs_orig
           cargo-sanitize -i Cargo.toml.cs_orig -o Cargo.toml
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add Cargo.toml
           git commit -m "create sanitized release"
-          git tag -a v${VERSION_TAG} -m "version ${VERSION_TAG}"
-          git push --tags
-
+          git tag -a v${VERSION_TAG} -m "version ${VERSION_TAG}"o
