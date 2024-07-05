@@ -1,33 +1,38 @@
 name: Sanitize Cargo
 
-on:
-  # Defining workflow_call means that this workflow can be called from
-  # your main workflow job
-  workflow_call:
-    # cargo-dist exposes the plan from the plan step, as a JSON string,
-    # to your job if it needs it
-    #inputs:
-    #  plan:
-    #    required: true
-    #    type: string
+on: push
+
+# .github/workflows/logger.yaml
+name: Event Loggger
+on: 
+  push:
+    branches:
+      - master
 
 jobs:
-  greeter:
+  sanitize_cargo_file:
+    if: "contains(github.event.head_commit.message, '[tag]')"
     runs-on: ubuntu-latest
     # This is optional; it exposes the plan to your job as an environment variable
     #env:
     #  PLAN: ${{ inputs.plan }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
       - name: Step 1
         run: |
-          echo "Hello!"
-          #echo "Plan is: ${PLAN}"
+          echo "Installing jq!"
+          apt-get install jq
       - name: Step 2
         run: |
           cargo install cargo-sanitize
       - name: Step 3
         run: |
-          ls -lah .
-          ls -lah ..
+          export VERSION_TAG=`cargo read-manifest | jq ".version" | tr -d '"'`
           cp Cargo.toml Cargo.toml.cs_orig
           cargo-sanitize -i Cargo.toml.cs_orig -o Cargo.toml
+          git add Cargo.toml
+          git commit -m "create sanitized release"
+          git tag -a v${VERSION_TAG} -m "version ${VERSION_TAG}"
+          git push --tags
+
