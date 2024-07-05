@@ -17,7 +17,7 @@ lto = "thin"
 # The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
 cargo-dist-version = "0.16.0"
 # Plan jobs to run in CI
-build-global-artifacts-jobs = ["./sanitize-cargo"]
+build-local-artifacts-jobs = ["./sanitize-cargo"]
 # CI backends to support
 ci = "github"
 # The installers to generate for each app
