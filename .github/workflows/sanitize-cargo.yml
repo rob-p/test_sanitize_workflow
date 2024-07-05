@@ -17,7 +17,7 @@ jobs:
       - name: Step 1
         run: |
           echo "Installing jq!"
-          apt-get install jq
+          sudo apt-get -y install jq
       - name: Step 2
         run: |
           cargo install cargo-sanitize
