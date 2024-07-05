@@ -1,0 +1,31 @@
+name: Sanitize Cargo
+
+on:
+  # Defining workflow_call means that this workflow can be called from
+  # your main workflow job
+  workflow_call:
+    # cargo-dist exposes the plan from the plan step, as a JSON string,
+    # to your job if it needs it
+    inputs:
+      plan:
+        required: true
+        type: string
+
+jobs:
+  greeter:
+    runs-on: ubuntu-latest
+    # This is optional; it exposes the plan to your job as an environment variable
+    env:
+      PLAN: ${{ inputs.plan }}
+    steps:
+      - name: Step 1
+        run: |
+          echo "Hello!"
+          echo "Plan is: ${PLAN}"
+      - name: Step 2
+        run: |
+          cargo install cargo-sanitize
+      - name: Step 3
+        run: |
+          cp Cargo.toml Cargo.toml.cs_orig
+          cargo-sanitize -i Cargo.toml.cs_orig -o Cargo.toml
