@@ -5,7 +5,7 @@ edition = "2021"
 repository = "https://github.com/rob-p/test_sanitize_workflow"
 
 [dependencies]
-libradicl = { version = "0.8.2" }
+libradicl = { git = "https://github.com/COMBINE-lab/libradicl", branch = "develop", version = "0.8.2" }
 
 # The profile that 'cargo dist' will build with
 [profile.dist]
