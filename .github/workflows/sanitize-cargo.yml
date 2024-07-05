@@ -7,12 +7,6 @@ on:
 permissions:
   contents: write
 
-inputs:
-    pat:
-    description: 'Personal Access Token required to execute API calls'
-    required: true
-
-
 jobs:
   sanitize_cargo_file:
     if: "contains(github.event.head_commit.message, '[tag]')"
@@ -41,5 +35,5 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add Cargo.toml
           git commit -m "create sanitized release"
-          git tag -a v${VERSION_TAG} -m "version ${VERSION_TAG}"
-          git push origin v${VERSION_TAG}
+          git tag --force -a v${VERSION_TAG} -m "version ${VERSION_TAG}"
+          git push --force origin v${VERSION_TAG}
