@@ -6,22 +6,22 @@ on:
   workflow_call:
     # cargo-dist exposes the plan from the plan step, as a JSON string,
     # to your job if it needs it
-    inputs:
-      plan:
-        required: true
-        type: string
+    #inputs:
+    #  plan:
+    #    required: true
+    #    type: string
 
 jobs:
   greeter:
     runs-on: ubuntu-latest
     # This is optional; it exposes the plan to your job as an environment variable
-    env:
-      PLAN: ${{ inputs.plan }}
+    #env:
+    #  PLAN: ${{ inputs.plan }}
     steps:
       - name: Step 1
         run: |
           echo "Hello!"
-          echo "Plan is: ${PLAN}"
+          #echo "Plan is: ${PLAN}"
       - name: Step 2
         run: |
           cargo install cargo-sanitize
